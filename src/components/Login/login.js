@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet} from 'react-native';
 import LoginForm from './loginForm';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { updateLoginField, requestLogin } from '../../actions/actions';
+import { Alert } from 'react-native';
 
 class Login extends Component {
   render() {
+
+    //Alert.alert(JSON.stringify(this.props.requestLogin));
+
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
@@ -12,7 +18,12 @@ class Login extends Component {
         </View>
 
         <View style={styles.formContainer}>
-          <LoginForm/>
+          <LoginForm 
+            onFieldUpdate={this.props.updateLoginField}
+            onLogin={this.props.requestLogin}
+            password={this.props.login.password}
+            email={this.props.login.email}
+          />
         </View>
       </View>
     )
@@ -42,6 +53,14 @@ const mapStateToProps = (state) => {
   return state;
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    requestLogin,
+    updateLoginField
+  }, dispatch);
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Login);

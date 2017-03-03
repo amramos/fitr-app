@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, TextInput, Image, View, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, TextInput, Image, View, Text, StyleSheet} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 export default class LoginForm extends Component {
@@ -12,46 +12,52 @@ export default class LoginForm extends Component {
           <Text style={styles.buttonText}>Login using Facebook</Text>
         </TouchableOpacity>
 
-        
+
         <View style={styles.regularLoginContainer}>
 
           <Text style={styles.infoText}>
             Or using your e-mail account
           </Text>
 
-        <TextInput 
-          style={styles.input}
-          placeholder="E-mail" 
-          underlineColorAndroid="transparent" 
-          returnKeyType="next"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          onSubmitEditing={() => this.passwordInput.focus()}/>
-        <TextInput 
-          style={styles.input}
-          placeholder="Password" 
-          underlineColorAndroid="transparent" 
-          returnKeyType="go" 
-          secureTextEntry 
-          ref={(input) => this.passwordInput = input}/>
-        <TouchableOpacity style={styles.buttonContainer}
-          onPress={Actions.instructor}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+          <TextInput 
+            style={styles.input}
+            placeholder="E-mail" 
+            underlineColorAndroid="transparent" 
+            returnKeyType="next"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={this.props.email}
+            onChangeText={(v) => this.props.onFieldUpdate('email', v)}
+            onSubmitEditing={() => this.passwordInput.focus()}/>
+          <TextInput 
+            style={styles.input}
+            placeholder="Password" 
+            underlineColorAndroid="transparent" 
+            returnKeyType="go" 
+            value={this.props.password}
+            secureTextEntry 
+            onChangeText={(v) => this.props.onFieldUpdate('password', v)}
+            ref={(input) => this.passwordInput = input}/>
+          <TouchableOpacity style={styles.buttonContainer}
+            onPress={() => this.props.onLogin(this.props.email, this.props.password)}
+          >
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.textContainer}>
-          <Text style={styles.text}>Forgot your password?</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.textContainer}>
+            <Text style={styles.text}>Forgot your password?</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.textContainer}>
-          <Text style={styles.text}>Not a member?</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.textContainer}
+            onPress={Actions.newUser}
+          >
+            <Text style={styles.text}>Not a member?</Text>
+          </TouchableOpacity>
         </View>
 
 
-        
+
       </View>
     )
   }
@@ -59,16 +65,8 @@ export default class LoginForm extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#0e3a3d',
     paddingLeft: 40,
     paddingRight: 40
-  },
-  regularLoginContainer: {
-    marginTop: 20,
-    paddingTop: 15,
-    borderStyle: 'solid',
-    borderTopColor: 'gray',
-    borderTopWidth: 1
   },
   input: {
     height: 40,
@@ -113,6 +111,13 @@ const styles = StyleSheet.create({
     top: 18,
     left: 15,
     position: 'absolute'
+  },
+  regularLoginContainer: {
+    marginTop: 20,
+    paddingTop: 15,
+    borderStyle: 'solid',
+    borderTopColor: 'gray',
+    borderTopWidth: 1
   }
 
 });
