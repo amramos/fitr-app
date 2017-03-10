@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import {TouchableOpacity, TextInput, Image, View, Text, StyleSheet} from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import React, { Component } from 'react'
+import {TouchableOpacity, TextInput, Image, View, Text, StyleSheet} from 'react-native'
+import {Actions} from 'react-native-router-flux'
+import {reduxForm} from 'redux-form'
 
 export default class LoginForm extends Component {
   render() {
