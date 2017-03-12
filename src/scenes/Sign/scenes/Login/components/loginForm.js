@@ -1,68 +1,7 @@
 import React, { Component } from 'react'
 import {TouchableOpacity, TextInput, Image, View, Text, StyleSheet} from 'react-native'
-import {Actions} from 'react-native-router-flux'
-import {reduxForm} from 'redux-form'
-
-export default class LoginForm extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-
-        <TouchableOpacity style={styles.facebookButtonContainer}>
-          <Image style={styles.facebookImage} source={require('../../imgs/facebook_f.png')}/>
-          <Text style={styles.buttonText}>Login using Facebook</Text>
-        </TouchableOpacity>
-
-
-        <View style={styles.regularLoginContainer}>
-
-          <Text style={styles.infoText}>
-            Or using your e-mail account
-          </Text>
-
-          <TextInput 
-            style={styles.input}
-            placeholder="E-mail" 
-            underlineColorAndroid="transparent" 
-            returnKeyType="next"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCorrect={false}
-            value={this.props.email}
-            onChangeText={(v) => this.props.onFieldUpdate('email', v)}
-            onSubmitEditing={() => this.passwordInput.focus()}/>
-          <TextInput 
-            style={styles.input}
-            placeholder="Password" 
-            underlineColorAndroid="transparent" 
-            returnKeyType="go" 
-            value={this.props.password}
-            secureTextEntry 
-            onChangeText={(v) => this.props.onFieldUpdate('password', v)}
-            ref={(input) => this.passwordInput = input}/>
-          <TouchableOpacity style={styles.buttonContainer}
-            onPress={() => this.props.onLogin(this.props.email, this.props.password)}
-          >
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.textContainer}>
-            <Text style={styles.text}>Forgot your password?</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.textContainer}
-            onPress={Actions.newUser}
-          >
-            <Text style={styles.text}>Not a member?</Text>
-          </TouchableOpacity>
-        </View>
-
-
-
-      </View>
-    )
-  }
-}
+import {Field, reduxForm} from 'redux-form'
+import FormTextInput from '../../../../../components/FormTextInput'
 
 const styles = StyleSheet.create({
   container: {
@@ -123,3 +62,56 @@ const styles = StyleSheet.create({
 
 });
 
+class LoginForm extends Component {
+
+  render(){
+    return (
+      <View style={styles.container}>
+
+        <TouchableOpacity style={styles.facebookButtonContainer}>
+          <Image style={styles.facebookImage} source={require('../../../../../imgs/facebook_f.png')}/>
+          <Text style={styles.buttonText}>Login using Facebook</Text>
+        </TouchableOpacity>
+
+
+        <View style={styles.regularLoginContainer}>
+
+          <Text style={styles.infoText}>
+            Or using your e-mail account
+          </Text>
+
+
+          <Field 
+            name="email" 
+            placeholder="E-mail"
+            component={FormTextInput}
+            underlineColorAndroid="transparent"
+            returnKeyType="next"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+          ></Field>
+          <Field
+            name="password"
+            component={FormTextInput}
+            placeholder="Password" 
+            underlineColorAndroid="transparent" 
+            returnKeyType="go" 
+            value={this.props.password}
+            secureTextEntry 
+            ref={(input) => this.passwordInput = input}
+          ></Field>
+
+        <TouchableOpacity style={styles.buttonContainer}
+          onPress={() => this.props.onLogin(this.props.email, this.props.password)}
+        >
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+
+      </View>
+    </View>
+  )
+    }
+}
+
+export default reduxForm({})(LoginForm);

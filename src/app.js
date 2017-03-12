@@ -1,33 +1,42 @@
-import React, { Component } from 'react';
-import { Provider, connect } from 'react-redux';
-import { Router, Scene } from 'react-native-router-flux';
-import store from './store/store';
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
+import { Provider, connect } from 'react-redux'
+import { Router, Scene } from 'react-native-router-flux'
+import store from './store/store'
 
-import Login from './components/Login/login';
-import NewUser from './components/Login/newUser';
-import Instructor from './components/Instructor/instructor';
-import {StyleSheet} from 'react-native';
+import Login from './components/Login/login'
+import {StyleSheet} from 'react-native'
 
-const RouterWithRedux = connect()(Router);
+import Sign from './scenes/Sign'
+import Student from './scenes/Student'
 
-const styles = StyleSheet.create({
-  tabBarStyle: {
-    backgroundColor: 'blue'
-  }
-});
+
+
+const RouterWithRedux = connect()(Router)
+
+
+//<Scene key="instructor" component={Instructor} title="Instructor page" hideNavBar={() => true } type="replace">
 
 export default class App extends Component {
   render() {
     return ( 
-    <Provider store={store}>
-      <RouterWithRedux>
-        <Scene key="login" component={Login} title="Login page" hideNavBar initial={true}/>
-        <Scene key="newUser" tabBarStyle={styles.tabBarStyle} component={NewUser} title="New member" hideNavBar/>
-        <Scene key="instructor" component={Instructor} title="Instructor page" hideNavBar={() => true } type="replace">
-        </Scene>
+      <Provider store={store}>
+        <RouterWithRedux>
+          <Scene key="student" component={Student} hideNavBar initial={true}/>
+          <Scene key="login" component={Sign.Login} hideNavBar />
+          <Scene key="register" component={Sign.Register} hideNavBar />
 
-      </RouterWithRedux>
-    </Provider>
-  )
+        </RouterWithRedux>
+      </Provider>
+    )
   }
 }
+/*
+ *
+*/
+
+
+/*
+ *
+          <Scene key="newUser" component={Sign.Register}  hideNavBar/>
+ */

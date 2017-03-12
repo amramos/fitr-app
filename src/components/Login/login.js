@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet} from 'react-native';
 import LoginForm from './loginForm';
 import { bindActionCreators } from 'redux';
@@ -64,3 +64,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login);
+*/

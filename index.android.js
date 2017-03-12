@@ -17,11 +17,19 @@ import { ThemeProvider } from 'react-native-material-ui';
 import App from './src/app';
 
 
+const uiTheme = {
+  toolbar: {
+    container: {
+      backgroundColor: '#000000'
+    }
+  }
+}
+
 
 export default class fitr extends Component {
   render() {
     return (
-      <ThemeProvider>
+      <ThemeProvider uiTheme={uiTheme}>
         <App/>
       </ThemeProvider>
     );
