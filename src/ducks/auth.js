@@ -1,7 +1,11 @@
 import { RECEIVE_LOGIN_SUCCESS } from './login'
 
 const initialState = {
-  user: ''
+  role: '',
+  id: '',
+  user: {
+
+  }
 }
 
 
@@ -10,7 +14,9 @@ export default function reducer(state = initialState, action){
     case RECEIVE_LOGIN_SUCCESS:
       return {
         ...state,
-        user: action.id
+        id: action.id,
+        role: action.role,
+        user: action.data
       }
     default:
       return state

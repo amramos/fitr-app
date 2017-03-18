@@ -36,16 +36,19 @@ export function requestLogin(email, password){
   }
 }
 
-export function receiveLoginSuccess(id){
+export function receiveLoginSuccess({id, role, data}){
   return {
     type: RECEIVE_LOGIN_SUCCESS,
-    id
+    id,
+    role,
+    data
   }
 }
 
-export function receiveLoginError(){
+export function receiveLoginError(error){
   return {
-    type: RECEIVE_LOGIN_ERROR
+    type: RECEIVE_LOGIN_ERROR,
+    error
   }
 }
 
@@ -60,9 +63,9 @@ export function doRequestLogin(email, password){
 
     return http('/user/login', 'POST', loginData)
       .then(json => {
-        dispatch(receiveLoginSuccess(json.id))
+        dispatch(receiveLoginSuccess({...json}))
 
-        Actions.student();
+        if (json.role === 'student') Actions.student();
 
         /*if(json.role === 'student'){
           Actions.student();

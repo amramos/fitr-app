@@ -22,18 +22,14 @@ export default class App extends Component {
     return ( 
       <Provider store={store}>
         <RouterWithRedux>
-          <Scene key="student" component={Student} hideNavBar initial={true}/>
-          <Scene key="login" component={Sign.Login} hideNavBar />
+          <Scene key="login" component={Sign.Login} hideNavBar initial={true}/>
           <Scene key="register" component={Sign.Register} hideNavBar />
-
+          <Scene key="student" component={Student} hideNavBar />
         </RouterWithRedux>
       </Provider>
     )
   }
 }
-/*
- *
-*/
 
 
 /*

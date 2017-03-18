@@ -33,17 +33,30 @@ const styles = StyleSheet.create({
   }
 })
 
-class Home extends Component {
+class Exercise extends Component {
   render() {
 
     return (
       <View style={styles.container}>
+        <View style={styles.image}> 
+          <Text>  </Text>
+        </View>
+
+
+        <View style={{flex: 1, alignItems: 'center'}}> 
+          <Text style={styles.title}> Bench Press </Text>
+          <Text style={styles.label}> 3 sets </Text>
+          <Text style={styles.label}> 12 repetitions </Text>
+          <Text style={styles.label}> 25kg </Text>
+        </View>
+        
+
         <TouchableOpacity style={styles.textContainer}>
-          <Text style={styles.finish}>Check-in</Text>
+          <Text style={styles.finish}>Finish</Text>
         </TouchableOpacity>
       </View>
     )
   }
 }
 
-export default Home
+export default Exercise 

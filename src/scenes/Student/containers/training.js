@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { ScrollView, TouchableOpacity, Text, Image, View, StyleSheet } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import Exercise from '../components/exercise'
 
 const styles = StyleSheet.create({
   container: {
@@ -33,17 +36,35 @@ const styles = StyleSheet.create({
   }
 })
 
-class Home extends Component {
+class Training extends Component {
   render() {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.textContainer}>
-          <Text style={styles.finish}>Check-in</Text>
-        </TouchableOpacity>
+        <View style={{flex: 1, alignItems: 'center'}}> 
+          <TouchableOpacity style={styles.textContainer}>
+            <Text style={styles.finish}>Começar treino</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Exercise />
       </View>
     )
   }
 }
 
-export default Home
+const mapStateToProps = function(state){
+  return {
+  }
+}
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({
+  }, dispatch)
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Training)
+
