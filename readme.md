@@ -1,6 +1,8 @@
 ### FITR app
 Aplicativo do sistema para gestão de treinos FITR.
 
+## PRs
+Sempre develop!
 
 ## Estrutura
 A ideia é separar o redux dos componentes react e reaproveitar o máximo de código possível.
