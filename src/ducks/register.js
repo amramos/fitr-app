@@ -59,7 +59,7 @@ export function doRequestRegister(email, password){
       password: password
     }
 
-    return http('/user/register', 'POST', loginData)
+    return http('/user/register', 'POST', registerData)
       .then(json => {
         Alert.alert('Success')
         dispatch(receiveRegisterSuccess(json.id))
