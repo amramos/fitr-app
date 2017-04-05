@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { ScrollView, TouchableOpacity, Text, Image, View, StyleSheet } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { doCheckin } from '../../../ducks/student'
 
 const styles = StyleSheet.create({
   container: {
@@ -38,7 +41,9 @@ class Home extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.textContainer}>
+        <TouchableOpacity style={styles.textContainer}
+          onPress={() => this.props.doCheckin(this.props.userId)}
+        >
           <Text style={styles.finish}>Check-in</Text>
         </TouchableOpacity>
       </View>
@@ -46,4 +51,19 @@ class Home extends Component {
   }
 }
 
-export default Home
+const mapStateToProps = function(state){
+  return {
+    userId: state.auth.id,
+  }
+}
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ 
+    doCheckin,
+  }, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home)
+
